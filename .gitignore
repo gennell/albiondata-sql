@@ -3,3 +3,4 @@ vendor/
 
 ./albiondata-sql
 ./albiondata-sql.yaml
+/.vs

@@ -14,10 +14,10 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-
-	"github.com/albiondata/albiondata-sql/lib"
+	
+	"github.com/gennell/albiondata-sql/lib"
 	nats "github.com/nats-io/go-nats"
-	adclib "github.com/regner/albiondata-client/lib"
+	adclib "github.com/gennell/albiondata-sql/adclib" //models from Albion Data Client project
 
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
