@@ -11,7 +11,7 @@ type ModelMarketOrder struct {
 	ItemID           string `gorm:"index"`
 	QualityLevel     int8   `gorm:"size:1"`
 	EnchantmentLevel int8   `gorm:"size:1"`
-	Price            int    `gorm:"index"`
+	Price            int64    `gorm:"index"`
 	InitialAmount    int
 	Amount           int
 	AuctionType      string `gorm:"index"`

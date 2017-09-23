@@ -106,11 +106,11 @@ func updateOrCreateOrder(db *gorm.DB, io *adclib.MarketOrder) error {
 		mo.ItemID = io.ItemID
 		mo.QualityLevel = int8(io.QualityLevel)
 		mo.EnchantmentLevel = int8(io.EnchantmentLevel)
-		price := strconv.Itoa(io.Price)
+		price := strconv.FormatInt(int64(io.Price),10)
 		if len(price) > 4 {
 			price = price[:len(price)-4]
-			i, _ := strconv.Atoi(price)
-			mo.Price = i
+			i64, _ := strconv.ParseInt(price, 10, 64)
+			mo.Price = i64
 		} else {
 			mo.Price = 0
 		}
@@ -224,6 +224,7 @@ func doCmd(cmd *cobra.Command, args []string) {
 
 	nc, _ := nats.Connect(viper.GetString("natsURL"))
 	defer nc.Close()
+	fmt.Printf("Connected to NATS server\n")
 
 	marketCh := make(chan *nats.Msg, 64)
 	marketSub, err := nc.ChanSubscribe("*.deduped", marketCh)
@@ -232,6 +233,7 @@ func doCmd(cmd *cobra.Command, args []string) {
 		return
 	}
 	defer marketSub.Unsubscribe()
+	fmt.Printf("Start subscribe\n")
 
 	for {
 		select {
